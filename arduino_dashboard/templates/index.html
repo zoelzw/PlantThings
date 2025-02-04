@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <h1>Arduino Sensor & LED Dashboard</h1>
+
+    <div class="sensor-container">
+        <p>Temperature: <span id="temp">--</span> °C</p>
+        <p>Humidity: <span id="humidity">--</span> %</p>
+        <p>CO₂: <span id="co2">--</span> ppm</p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="sensorChart"></canvas>
+    </div>
+
+    <div class="led-container">
+        <label>LED 1 Brightness:</label>
+        <input type="range" id="led1" min="0" max="255" value="0">
+
+        <label>LED 2 Brightness:</label>
+        <input type="range" id="led2" min="0" max="255" value="0">
+
+        <label>LED 3 Brightness:</label>
+        <input type="range" id="led3" min="0" max="255" value="0">
+    </div>
+</body>
+</html>

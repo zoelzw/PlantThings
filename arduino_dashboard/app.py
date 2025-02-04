@@ -1,0 +1,69 @@
+from flask import Flask, render_template, request, jsonify
+import serial
+import json
+import threading
+import time
+
+# Set up Flask app
+app = Flask(__name__)
+
+# Configure Serial (change based on your system)
+SERIAL_PORT = "COM3"  # Windows (e.g., "COM3"), for Linux/Mac use "/dev/ttyUSB0"
+BAUD_RATE = 115200
+
+# Connect to Arduino
+ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
+
+# Sensor data storage (for visualization)
+sensor_history = {"timestamps": [], "temp": [], "humidity": [], "co2": []}
+MAX_HISTORY = 50  # Number of historical points to keep
+
+# Background thread to continuously read sensor data
+sensor_data = {"temp": "--", "humidity": "--", "co2": "--"}
+
+def read_sensor_data():
+    global sensor_data
+    while True:
+        try:
+            if ser.in_waiting > 0:
+                line = ser.readline().decode("utf-8").strip()
+                new_data = json.loads(line)
+                sensor_data.update(new_data)
+
+                # Store historical data
+                timestamp = time.strftime("%H:%M:%S")
+                sensor_history["timestamps"].append(timestamp)
+                sensor_history["temp"].append(new_data["temp"])
+                sensor_history["humidity"].append(new_data["humidity"])
+                sensor_history["co2"].append(new_data["co2"])
+
+                # Limit history size
+                if len(sensor_history["timestamps"]) > MAX_HISTORY:
+                    for key in sensor_history:
+                        sensor_history[key].pop(0)
+        except json.JSONDecodeError:
+            pass  # Ignore bad data
+
+# Start background thread
+threading.Thread(target=read_sensor_data, daemon=True).start()
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/sensor")
+def get_sensor_data():
+    return jsonify(sensor_data)
+
+@app.route("/history")
+def get_sensor_history():
+    return jsonify(sensor_history)
+
+@app.route("/led", methods=["POST"])
+def set_led():
+    data = request.json
+    ser.write((json.dumps(data) + "\n").encode("utf-8"))
+    return jsonify({"status": "success", "message": "LED updated"}), 200
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
