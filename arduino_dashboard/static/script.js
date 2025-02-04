@@ -72,5 +72,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("led1").addEventListener("input", sendLedData);
     document.getElementById("led2").addEventListener("input", sendLedData);
-    document.getElementById("led3").addEventListener("input", sendLedData);
+    // document.getElementById("led3").addEventListener("input", sendLedData);
 });
