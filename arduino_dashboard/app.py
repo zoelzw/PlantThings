@@ -8,7 +8,7 @@ import time
 app = Flask(__name__)
 
 # Configure Serial (change based on your system)
-SERIAL_PORT = "COM3"  # Windows (e.g., "COM3"), for Linux/Mac use "/dev/ttyUSB0"
+SERIAL_PORT = "/dev/cu.usbmodem157920201"  # Windows (e.g., "COM3"), for Linux/Mac use "/dev/ttyUSB0"
 BAUD_RATE = 115200
 
 # Connect to Arduino
