@@ -56,7 +56,6 @@ def read_sensor_data():
             reconnect_serial()
         except json.JSONDecodeError:
             print("bad data")
-
             # Ignore malformed data
             pass
 
