@@ -82,6 +82,7 @@ def get_sensor_history():
 def set_led():
     data = request.json
     ser.write((json.dumps(data) + "\n").encode("utf-8"))
+    print((json.dumps(data) + "\n").encode("utf-8"))
     return jsonify({"status": "success", "message": "LED updated"}), 200
 
 if __name__ == "__main__":
