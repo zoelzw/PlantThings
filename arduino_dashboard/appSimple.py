@@ -88,8 +88,4 @@ def set_led():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    app.run(debug=True, host="0.0.0.0", port=5002)
-=======
     app.run(debug=True, host="0.0.0.0", port=5001)
->>>>>>> 721310aebab6eb83e65769db9950bc4b95506001
