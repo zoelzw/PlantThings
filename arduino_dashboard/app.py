@@ -12,7 +12,9 @@ SERIAL_PORT = "/dev/cu.usbmodem157920201"  # Windows (e.g., "COM3"), for Linux/M
 BAUD_RATE = 115200
 
 # Connect to Arduino
-ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
+ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=3)
+time.sleep(2)
+ser.flush() 
 
 # Sensor data storage (for visualization)
 sensor_history = {"timestamps": [], "temp": [], "humidity": [], "co2": []}
@@ -27,22 +29,39 @@ def read_sensor_data():
         try:
             if ser.in_waiting > 0:
                 line = ser.readline().decode("utf-8").strip()
-                new_data = json.loads(line)
-                sensor_data.update(new_data)
+                if line:  # Ensure data is not empty
+                    new_data = json.loads(line)
+                    sensor_data.update(new_data)
 
-                # Store historical data
-                timestamp = time.strftime("%H:%M:%S")
-                sensor_history["timestamps"].append(timestamp)
-                sensor_history["temp"].append(new_data["temp"])
-                sensor_history["humidity"].append(new_data["humidity"])
-                sensor_history["co2"].append(new_data["co2"])
+                    # Store historical data
+                    timestamp = time.strftime("%H:%M:%S")
+                    sensor_history["timestamps"].append(timestamp)
+                    sensor_history["temp"].append(new_data["temp"])
+                    sensor_history["humidity"].append(new_data["humidity"])
+                    sensor_history["co2"].append(new_data["co2"])
 
-                # Limit history size
-                if len(sensor_history["timestamps"]) > MAX_HISTORY:
-                    for key in sensor_history:
-                        sensor_history[key].pop(0)
+                    # Limit history size
+                    if len(sensor_history["timestamps"]) > MAX_HISTORY:
+                        for key in sensor_history:
+                            sensor_history[key].pop(0)
+        except serial.SerialException:
+            print("Serial device disconnected. Retrying...")
+            reconnect_serial()
         except json.JSONDecodeError:
             pass  # Ignore bad data
+
+def reconnect_serial():
+    global ser
+    while True:
+        try:
+            ser.close()
+            ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=3)
+            time.sleep(2)
+            print("Reconnected to serial port.")
+            return
+        except serial.SerialException:
+            print("Retrying serial connection...")
+            time.sleep(5)
 
 # Start background thread
 threading.Thread(target=read_sensor_data, daemon=True).start()
