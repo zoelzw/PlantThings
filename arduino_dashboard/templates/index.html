@@ -20,10 +20,18 @@
             height: 100vh;
             flex-direction: column;
         }
+        .big-header {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
         .dashboard {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-gap: 20px;
+            grid-gap: 10px;
             max-width: 1200px;
             width: 100%;
             padding: 20px;
@@ -95,6 +103,8 @@
     </style>
 </head>
 <body>
+    <div class="big-header">Smart Farm Dashboard</div>
+
     <!-- Sensor Data Section -->
     <div class="section-header">Sensor Data</div>
     <div class="dashboard">
