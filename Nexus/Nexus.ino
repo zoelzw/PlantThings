@@ -46,24 +46,24 @@ void loop() {
     }
 
     // Check if there is incoming serial data
-    if (Serial.available() > 0) {
-        String input = Serial.readStringUntil('\n');  // Read incoming command
+    // if (Serial.available() > 0) {
+    //     String input = Serial.readStringUntil('\n');  // Read incoming command
 
-        StaticJsonDocument<128> jsonInput;
-        DeserializationError error = deserializeJson(jsonInput, input);
+    //     StaticJsonDocument<128> jsonInput;
+    //     DeserializationError error = deserializeJson(jsonInput, input);
 
-        if (!error) {
-            if (jsonInput.containsKey("led1")) {
-                analogWrite(LED1, jsonInput["led1"]);
-            }
-            if (jsonInput.containsKey("led2")) {
-                analogWrite(LED2, jsonInput["led2"]);
-            }
-            // if (jsonInput.containsKey("led3")) {
-            //     analogWrite(LED3, jsonInput["led3"]);
-            // }
-        }
-    }
+    //     if (!error) {
+    //         if (jsonInput.containsKey("led1")) {
+    //             analogWrite(LED1, jsonInput["led1"]);
+    //         }
+    //         if (jsonInput.containsKey("led2")) {
+    //             analogWrite(LED2, jsonInput["led2"]);
+    //         }
+    //         // if (jsonInput.containsKey("led3")) {
+    //         //     analogWrite(LED3, jsonInput["led3"]);
+    //         // }
+    //     }
+    // }
 
     delay(1000);  // Adjust the delay as needed
 }
