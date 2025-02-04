@@ -5,20 +5,20 @@ Adafruit_SCD30  scd30;
 
 
 void setup(void) {
-  TwoWire I2C1 = TwoWire(1); 
-  I2C1.begin(17, 16); // Set SDA and SCL pins for I2C1
+  //TwoWire I2C1 = TwoWire(1); 
+  //I2C1.begin(17, 16); // Set SDA and SCL pins for I2C1
   Serial.begin(115200);
+  delay(1000);
   while (!Serial) delay(10);     // will pause Zero, Leonardo, etc until serial console opens
 
   Serial.println("Adafruit SCD30 test!");
-<<<<<<< HEAD
-=======
+
     // Start I2C communication on the second bus (Wire1)
   //Wire1.begin(17,16);  // I2C1 pins: SDA=21, SCL=22 (for Teensy 4.x)
->>>>>>> 5cdb22b9facf1ea9652f1d092cdcafbd2cbb1731
+
 
   // Try to initialize!
-  if (!scd30.begin(I2C1)) {
+  if (!scd30.begin()) {
     Serial.println("Failed to find SCD30 chip");
     while (1) { delay(10); }
   }
