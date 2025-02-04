@@ -2,9 +2,9 @@
 #include <Adafruit_SCD30.h>  // Library for the SCD30 CO₂ sensor
 #include <ArduinoJson.h>     // Library to format data as JSON
 
-#define LED1 0   // PWM 0 top first port of J2
-#define LED2 1  // PWM pin for LED 2
-#define LED3 10  // PWM 10 bottom port of J2
+#define LED1 19   // PWM 0 top first port of J2
+#define LED2 20  // PWM pin for LED 2
+// #define LED3 10  // PWM 10 bottom port of J2
 
 Adafruit_SCD30 scd30;
 
@@ -14,7 +14,7 @@ void setup() {
     
     pinMode(LED1, OUTPUT);
     pinMode(LED2, OUTPUT);
-    pinMode(LED3, OUTPUT);
+    // pinMode(LED3, OUTPUT);
 
     if (!scd30.begin()) {
         Serial.println("Failed to find SCD30 sensor! Check wiring.");
@@ -55,9 +55,9 @@ void loop() {
             if (jsonInput.containsKey("led2")) {
                 analogWrite(LED2, jsonInput["led2"]);
             }
-            if (jsonInput.containsKey("led3")) {
-                analogWrite(LED3, jsonInput["led3"]);
-            }
+            // if (jsonInput.containsKey("led3")) {
+            //     analogWrite(LED3, jsonInput["led3"]);
+            // }
         }
     }
 
