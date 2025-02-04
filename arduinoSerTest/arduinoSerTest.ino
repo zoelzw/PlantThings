@@ -13,9 +13,11 @@ void setup() {
 
 void loop() {
     // Simulate dummy data for temperature, humidity, and CO2
-    float temp = 22.5;      // Example temperature in Celsius
-    float humidity = 55.0;  // Example humidity in percentage
-    float co2 = 400.0;      // Example CO2 level in ppm
+    // Generate random dummy data within a range
+    float temp = random(180, 300) / 10.0;   // Random temperature between 18.0°C and 30.0°C
+    float humidity = random(400, 800) / 10.0; // Random humidity between 40.0% and 80.0%
+    float co2 = random(350, 1000);           // Random CO2 between 350 ppm and 1000 ppm
+
 
     // Create a JSON object to store the dummy data
     StaticJsonDocument<256> jsonDoc;
