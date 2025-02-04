@@ -27,7 +27,7 @@ def read_sensor_data():
     global sensor_data
     while True:
         try:
-            if ser.in_waiting > 0:
+            if 1:#ser.in_waiting > 0:
                 print("hi")
                 line = ser.readline().decode("utf-8").strip()
                 print("gdfdgdf")
