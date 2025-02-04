@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 # Configure Serial (change based on your system)
 
-SERIAL_PORT = "/dev/tty.usbserial-D30873OK"  # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
-BAUD_RATE = 115200
+SERIAL_PORT = "/dev/cu.usbmodem157920201"   # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
+BAUD_RATE = 9600
 
 
 # Connect to Arduino
