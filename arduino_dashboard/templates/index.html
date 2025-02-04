@@ -3,33 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arduino Dashboard</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/script.js" defer></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sensor Data Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1rem;
+            color: #333;
+        }
+        /* Divider Styling */
+        hr {
+            width: 80%;
+            border: 0;
+            border-top: 2px solid #ddd;
+            margin: 30px auto;
+        }
+        /* Section Headers */
+        .section-header {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        /* Second Row for Sliders */
+        .slider-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .slider-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .slider-card label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .slider-card input[type='range'] {
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Arduino Sensor & LED Dashboard</h1>
-
-    <div class="sensor-container">
-        <p>Temperature: <span id="temp">--</span> °C</p>
-        <p>Humidity: <span id="humidity">--</span> %</p>
-        <p>CO₂: <span id="co2">--</span> ppm</p>
+    <!-- Sensor Data Section -->
+    <div class="section-header">Sensor Data</div>
+    <div class="dashboard">
+        <div class="card">
+            <h2>Temperature</h2>
+            <p>Temperature: <span id="temp">--</span> °C</p>
+        </div>
+        <div class="card">
+            <h2>Humidity</h2>
+            <p>Humidity: <span id="humidity">--</span> %</p>
+        </div>
+        <div class="card">
+            <h2>CO2</h2>
+            <p>CO₂: <span id="co2">--</span> ppm</p>
+        </div>
     </div>
 
-    <div class="chart-container">
-        <canvas id="sensorChart"></canvas>
-    </div>
+    <!-- Divider -->
+    <hr>
 
-    <div class="led-container">
-        <label>LED 1 Brightness:</label>
-        <input type="range" id="led1" min="0" max="255" value="0">
-
-        <label>LED 2 Brightness:</label>
-        <input type="range" id="led2" min="0" max="255" value="0">
-
-        <label>LED 3 Brightness:</label>
-        <input type="range" id="led3" min="0" max="255" value="0">
+    <!-- LED Control Section -->
+    <div class="section-header">LED Controls</div>
+    <div class="slider-row">
+        <div class="slider-card">
+            <h2>LED 1</h2>
+            <label>Brightness:</label>
+            <input type="range" id="led1" min="0" max="255" value="0">
+        </div>
+        <div class="slider-card">
+            <h2>LED 2</h2>
+            <label>Brightness:</label>
+            <input type="range" id="led2" min="0" max="255" value="0">
+        </div>
+        <div class="slider-card">
+            <h2>LED 3</h2>
+            <label>Brightness:</label>
+            <input type="range" id="led3" min="0" max="255" value="0">
+        </div>
     </div>
 </body>
 </html>
