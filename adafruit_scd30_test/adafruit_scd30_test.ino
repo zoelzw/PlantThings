@@ -11,7 +11,7 @@ void setup(void) {
 
   Serial.println("Adafruit SCD30 test!");
     // Start I2C communication on the second bus (Wire1)
-  Wire1.begin(21, 22);  // I2C1 pins: SDA=21, SCL=22 (for Teensy 4.x)
+  Wire1.begin(17,16);  // I2C1 pins: SDA=21, SCL=22 (for Teensy 4.x)
 
   // Initialize the sensor using the second I2C bus
   if (!scd30.begin_I2C(Wire1)) {  // Use Wire1 instead of Wire
