@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Configure Serial (change based on your system)
 SERIAL_PORT = "/dev/cu.usbmodem157920201"  # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
-BAUD_RATE = 115200
+BAUD_RATE = 9600
 
 # Connect to Arduino
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=3)
@@ -28,9 +28,8 @@ def read_sensor_data():
     while True:
         try:
             if 1:#ser.in_waiting > 0:
-                print("hi")
                 line = ser.readline().decode("utf-8").strip()
-                print("gdfdgdf")
+                print(line)
                 if line:  # Ensure data is not empty
                     new_data = json.loads(line)
                     print(new_data)
@@ -49,12 +48,12 @@ def read_sensor_data():
                             sensor_history[key].pop(0)
             else:
                 print("happy")
-            time.sleep(0.5)
+            time.sleep(.5)
         except serial.SerialException:
             print("Serial device disconnected. Retrying...")
             reconnect_serial()
         except json.JSONDecodeError:
-            print("gilg")
+            print("bad data")
             # Ignore malformed data
             pass
 

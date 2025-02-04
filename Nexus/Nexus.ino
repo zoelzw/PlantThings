@@ -12,7 +12,7 @@ void setup() {
     // Initialize the second I2C bus (I2C1)
     // TwoWire I2C1 = TwoWire(1); 
     // I2C1.begin(16, 17); // Set SDA and SCL pins for I2C1
-    Serial.begin(115200);
+    Serial.begin(9600);
 
     while (!Serial) {
         delay(100);  // Wait for serial connection to stabilize
