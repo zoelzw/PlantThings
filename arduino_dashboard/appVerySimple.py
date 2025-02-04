@@ -1,6 +1,6 @@
 import serial, time
 
-ser = serial.Serial("/dev/cu.usbmodem157920201", 115200, timeout=2)
+ser = serial.Serial("/dev/tty.usbserial-D30873OK", 115200, timeout=2)
 time.sleep(2)
 
 while True:
