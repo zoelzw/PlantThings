@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
 import serial
 import json
 import threading
@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 # Configure Serial (change based on your system)
 
-SERIAL_PORT = "/dev/cu.usbmodem157920201"   # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
-BAUD_RATE = 9600
+SERIAL_PORT = "/dev/tty.usbserial-D30873OK"  # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
+BAUD_RATE = 115200
 
 
 # Connect to Arduino
@@ -79,6 +79,13 @@ def get_sensor_data():
 @app.route("/history")
 def get_sensor_history():
     return jsonify(sensor_history)
+@app.route("/led", methods=["POST"])
+def set_led():
+    data = request.json
+    ser.write((json.dumps(data) + "\n").encode("utf-8"))
+    print((json.dumps(data) + "\n").encode("utf-8"),"++++++++++++++++++++++++++")
+    return jsonify({"status": "success", "message": "LED updated"}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5001)
