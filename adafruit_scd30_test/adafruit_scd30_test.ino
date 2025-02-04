@@ -18,7 +18,7 @@ void setup(void) {
 
 
   // Try to initialize!
-  if (!scd30.begin()) {
+  if (!scd30.begin(SCD30_I2CADDR_DEFAULT, &Wire1)) {
     Serial.println("Failed to find SCD30 chip");
     while (1) { delay(10); }
   }
