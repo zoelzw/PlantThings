@@ -13,6 +13,14 @@ void setup() {
     // TwoWire I2C1 = TwoWire(1); 
     // I2C1.begin(16, 17); // Set SDA and SCL pins for I2C1
     Serial.begin(115200);
+
+    while (!Serial) {
+        delay(100);  // Wait for serial connection to stabilize
+    }
+
+    Serial.println("Teensy Serial Ready");  // Confirmation message
+
+    
     Wire.begin();
     
     pinMode(LED1, OUTPUT);
@@ -24,6 +32,7 @@ void setup() {
         while (1);
     }
     Serial.println("SCD30 Found!");
+    
 }
 
 void loop() {
