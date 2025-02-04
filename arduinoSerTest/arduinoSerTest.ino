@@ -9,10 +9,7 @@ void setup() {
 
     // Simulated setup (no actual sensor initialization needed)
     Serial.println("Using Dummy Data!");
-}
-
-void loop() {
-    // Simulate dummy data for temperature, humidity, and CO2
+     // Simulate dummy data for temperature, humidity, and CO2
     float temp = 22.5;      // Example temperature in Celsius
     float humidity = 55.0;  // Example humidity in percentage
     float co2 = 400.0;      // Example CO2 level in ppm
@@ -31,4 +28,8 @@ void loop() {
    
 
     delay(1000);  // Delay for 1 second before sending the next dummy data
+}
+
+void loop() {
+   
 }
