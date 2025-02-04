@@ -9,6 +9,9 @@
 Adafruit_SCD30 scd30;
 
 void setup() {
+    // Initialize the second I2C bus (I2C1)
+    TwoWire I2C1 = TwoWire(1); 
+    I2C1.begin(16, 17); // Set SDA and SCL pins for I2C1
     Serial.begin(115200);
     Wire.begin();
     
@@ -16,7 +19,7 @@ void setup() {
     pinMode(LED2, OUTPUT);
     // pinMode(LED3, OUTPUT);
 
-    if (!scd30.begin()) {
+    if (!scd30.begin_I2C(I2C1)) {
         Serial.println("Failed to find SCD30 sensor! Check wiring.");
         while (1);
     }
