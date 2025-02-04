@@ -1,5 +1,11 @@
+#include <SparkFun_I2C_Mux_Arduino_Library.h>
+
 // Basic demo for readings from Adafruit SCD30
 #include <Adafruit_SCD30.h>
+
+
+#include <Wire.h>
+
 
 Adafruit_SCD30  scd30;
 
@@ -7,10 +13,12 @@ Adafruit_SCD30  scd30;
 void setup(void) {
   //TwoWire I2C1 = TwoWire(1); 
   //I2C1.begin(17, 16); // Set SDA and SCL pins for I2C1
+  // Wire1.begin(16,17)
+  Wire.begin();
   Serial.begin(115200);
   delay(1000);
   while (!Serial) delay(10);     // will pause Zero, Leonardo, etc until serial console opens
-
+  Mux.begin();
   Serial.println("Adafruit SCD30 test!");
 
     // Start I2C communication on the second bus (Wire1)
