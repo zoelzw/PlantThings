@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const ledData = {
             led1: document.getElementById("led1").value,
             led2: document.getElementById("led2").value,
-            led3: document.getElementById("led3").value
+            // led3: document.getElementById("led3").value
         };
 
         fetch("/led", {
