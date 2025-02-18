@@ -8,7 +8,7 @@ import time
 app = Flask(__name__)
 
 # Configure Serial (change based on your system)
-SERIAL_PORT = "/dev/cu.usbmodem157920201"  # Windows (e.g., "COM3"), for Linux/Mac use "/dev/ttyUSB0"
+SERIAL_PORT = "/dev/tty.usbserial-D30873OK"  
 BAUD_RATE = 115200
 
 # Connect to Arduino
@@ -17,7 +17,8 @@ time.sleep(2)
 ser.flush() 
 
 # Sensor data storage (for visualization)
-sensor_history = {"timestamps": [], "temp": [], "humidity": [], "co2": []}
+# sensor_history = {"timestamps": [], "temp": [], "humidity": [], "co2": []}
+sensor_history = {"temp": [], "humidity": [], "co2": []}
 MAX_HISTORY = 50  # Number of historical points to keep
 
 # Background thread to continuously read sensor data
@@ -35,15 +36,15 @@ def read_sensor_data():
 
                     # Store historical data
                     timestamp = time.strftime("%H:%M:%S")
-                    sensor_history["timestamps"].append(timestamp)
+                    # sensor_history["timestamps"].append(timestamp)
                     sensor_history["temp"].append(new_data["temp"])
                     sensor_history["humidity"].append(new_data["humidity"])
                     sensor_history["co2"].append(new_data["co2"])
 
                     # Limit history size
-                    if len(sensor_history["timestamps"]) > MAX_HISTORY:
-                        for key in sensor_history:
-                            sensor_history[key].pop(0)
+                    # if len(sensor_history["timestamps"]) > MAX_HISTORY:
+                    #     for key in sensor_history:
+                    #         sensor_history[key].pop(0)
         except serial.SerialException:
             print("Serial device disconnected. Retrying...")
             reconnect_serial()
