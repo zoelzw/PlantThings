@@ -25,7 +25,7 @@ this dummy sensor test should work for Teensy as well
 3. Press CTRL+C to quit
 4. Debug
     1. test serial communication pipeline: run appVerySimple.py 
-    2. TODO: app.py shows instable serial port connection 
+    2. TODO: app.py shows unstable serial port connection 
     ```
     * Restarting with stat
     * Debugger is active!
