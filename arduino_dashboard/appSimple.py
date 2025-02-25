@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Configure Serial (change based on your system)
 
-SERIAL_PORT = "/dev/tty.usbserial-D30873OK"  # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
+SERIAL_PORT = "/dev/cu.usbmodem157920201" #"/dev/tty.usbserial-D30873OK"  # On Windows: "COM3", Linux/Mac: "/dev/ttyUSB0" or "/dev/cu.usbmodem..."
 BAUD_RATE = 115200
 
 
@@ -47,7 +47,8 @@ def read_sensor_data():
                     if len(sensor_history["timestamps"]) > MAX_HISTORY:
                         for key in sensor_history:
                             sensor_history[key].pop(0)
-        except json.JSONDecodeError:
+        except json.JSONDecodeError  as e:
+            print(e)
             print("json wrong")
             # Ignore malformed data
             pass
@@ -61,8 +62,9 @@ def reconnect_serial():
             time.sleep(2)
             print("Reconnected to serial port.")
             return
-        except serial.SerialException:
-            print("Retrying serial connection...")
+        except serial.SerialException as e:
+            print(e)
+            #print("Retrying serial connection...")
             time.sleep(5)
 
 # Start background thread
