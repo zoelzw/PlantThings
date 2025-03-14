@@ -51,6 +51,10 @@ def read_sensor_data():
         except json.JSONDecodeError:
             pass  # Ignore bad data
 
+
+# Start background thread
+threading.Thread(target=read_sensor_data, daemon=True).start()
+
 def reconnect_serial():
     global ser
     while True:
@@ -64,8 +68,11 @@ def reconnect_serial():
             print("Retrying serial connection...")
             time.sleep(5)
 
-# Start background thread
-threading.Thread(target=read_sensor_data, daemon=True).start()
+def set_led():
+    data = request.json
+    ser.write((json.dumps(data) + "\n").encode("utf-8"))
+    return jsonify({"status": "success", "message": "LED updated"}), 200
+
 
 @app.route("/")
 def index():
