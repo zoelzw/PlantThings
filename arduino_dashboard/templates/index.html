@@ -131,12 +131,12 @@
         <div class="slider-card">
             <h2>LED 1</h2>
             <label>Brightness:</label>
-            <input type="range" id="led1" min="0" max="255" value="0">
+            <input type="range" id="led1" min="0" max="255" value="0" oninput="sendLedData('led1')">
         </div>
         <div class="slider-card">
             <h2>LED 2</h2>
             <label>Brightness:</label>
-            <input type="range" id="led2" min="0" max="255" value="0">
+            <input type="range" id="led2" min="0" max="255" value="0" oninput="sendLedData('led2')">
         </div>
         <!-- <div class="slider-card">
             <h2>LED 3</h2>
