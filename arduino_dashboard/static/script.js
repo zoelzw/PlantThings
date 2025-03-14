@@ -14,19 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Error fetching sensor data:", error));
     }
 
-    function sendLedData(led) {
-        // let ledData = {};
-        if (led === 'led1') {
-            // Only send data for LED 1
-            ledData = {
-                led1: document.getElementById("led1").value
-            };
-        } else if (led === 'led2') {
-            // Only send data for LED 2
-            ledData = {
-                led2: document.getElementById("led2").value
-            };
-        }
+    function sendLedData() {
+        // Get the values of both sliders
+        const led1Value = document.getElementById("led1").value;
+        const led2Value = document.getElementById("led2").value;
+
+        // Construct the message in the format "L, 1, value" and "L, 2, value"
+        const ledData = `L, 1, ${led1Value}\nL, 2, ${led2Value}\n`;
 
         fetch("/led", {
             method: "POST",

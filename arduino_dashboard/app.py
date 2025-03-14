@@ -76,18 +76,13 @@ def reconnect_serial():
 threading.Thread(target=read_sensor_data, daemon=True).start()
 
 def set_led():
-    led_data = request.json
-    print(led_data)
-     # Handle data for LED1 and/or LED2, depending on what was sent
-    if 'led1' in led_data:
-        led1 = led_data['led1']
-        print(f"Received LED1 data: {led1}")
-    
-    if 'led2' in led_data:
-        led2 = led_data['led2']
-        print(f"Received LED2 data: {led2}")
-    
-    return jsonify({"message": "LED data received", "data": led_data})
+    data = request.json
+    encoData = (json.dumps(data) + "\n").encode("utf-8")
+    print(encoData.split(" "))
+    ser.write(encoData)
+    print(encoData)
+
+    return jsonify({"status": "success", "message": "LED updated"}), 200
 
 
 @app.route("/")
