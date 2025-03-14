@@ -12,8 +12,8 @@ import logging
 app = Flask(__name__)
 
 # Configure Serial (change based on your system)
-
-SERIAL_PORT = "/dev/cu.usbserial-D30873OK" 
+#"/dev/cu.usbserial-D30873OK" 
+SERIAL_PORT = "/dev/cu.usbmodem157920201"
 BAUD_RATE = 115200
 
 
@@ -75,15 +75,16 @@ def reconnect_serial():
 # Start background thread
 threading.Thread(target=read_sensor_data, daemon=True).start()
 
+'''
 def set_led():
     data = request.json
-    encoData = (json.dumps(data) + "\n").encode("utf-8")
-    print(encoData.split(" "))
+    encoData = (json.dumps(data)).encode("utf-8")
+    #print(encoData.split(" "))
     ser.write(encoData)
     print(encoData)
 
     return jsonify({"status": "success", "message": "LED updated"}), 200
-
+'''
 
 @app.route("/")
 def index():
@@ -99,9 +100,18 @@ def get_sensor_history():
 
 @app.route("/led", methods=["POST"])
 def set_led():
-    data = request.json
-    ser.write((json.dumps(data) + "\n").encode("utf-8"))
-    print((json.dumps(data) + "\n").encode("utf-8"))
+    jsonData = request.json
+    #encoData = (json.dumps(ledString)).encode("utf-8")
+    print(jsonData + "fdfdfdf")
+    #command = jsonData["command"]  # "L"
+    #led = data["led"]          # 1
+    #value = data["value"]      # 128
+    #print("oingo")
+    #print(command, led, value)
+    #print("boingo")
+    #command = str(data["command"])+ ',' + str(data["led"]) + ',' + str(data["value"])
+    ser.write(encoData)#command)
+    print(ledString, encoData)#command)
     return jsonify({"status": "success", "message": "LED updated"}), 200
 
 if __name__ == "__main__":

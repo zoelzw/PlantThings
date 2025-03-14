@@ -14,7 +14,7 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   while (!Serial) {
     delay(100);  // Wait for serial connection to stabilize

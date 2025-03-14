@@ -17,10 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function sendLedData() {
         // Get the values of both sliders
         const led1Value = document.getElementById("led1").value;
-        const led2Value = document.getElementById("led2").value;
+        //const led2Value = document.getElementById("led2").value;
 
         // Construct the message in the format "L, 1, value" and "L, 2, value"
-        const ledData = `L, 1, ${led1Value}\nL, 2, ${led2Value}\n`;
+        //const ledData = `L,1, ${led1Value}`;//`L,1,${led1Value}`;
+        const ledData = { command: "L", led: 1, value: led1Value };
 
         fetch("/led", {
             method: "POST",
@@ -35,5 +36,5 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(fetchSensorData, 1000);  // Update every 1 second
 
     document.getElementById("led1").addEventListener("input", sendLedData);
-    document.getElementById("led2").addEventListener("input", sendLedData);
+    //document.getElementById("led2").addEventListener("input", sendLedData);
 });
