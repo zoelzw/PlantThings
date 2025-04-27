@@ -53,4 +53,16 @@ this dummy sensor test should work for Teensy as well
     127.0.0.1 - - [17/Feb/2025 21:26:01] "GET /sensor HTTP/1.1" 200 -
     Reconnected to serial port.
     ```
+
+## Notes
+If you kill the python server with cntrl-c, the web address will not be freed. 
+In order to free it, run 
+lsof -i :5001 (if using 5001) 
+```
+COMMAND     PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+python3.9 28930 aamleshi    9u  IPv4 0xe18216d0d38e1d61      0t0  TCP *:commplex-link (LISTEN)
+python3.9 28938 aamleshi    9u  IPv4 0xe18216d0d38e1d61      0t0  TCP *:commplex-link (LISTEN)
+python3.9 28938 aamleshi   43u  IPv4 0xe18216d0d38e1d61      0t0  TCP *:commplex-link (LISTEN)
+```
+kill -9 28930 (in this example PID = 28930) 
     
