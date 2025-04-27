@@ -19,6 +19,13 @@ this dummy sensor test should work for Teensy as well
 5. upload 
 6. open serial monitor and set up baud rate to be 115200, new line 
 7. if dummy data is showing up correctlt, quit Arduino (exit the app to release serial port)
+##.env
+Set up .env in arduino_dashboard top level
+Contents should include
+```
+SERIAL_PORT = "YOUR SERIAL PORT"
+```
+
 ## Python Server WIP 
 1. run appSimple.py in terminal 
 2. go to http://127.0.0.1:5001 in browser 
