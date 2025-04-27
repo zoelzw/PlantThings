@@ -4,6 +4,10 @@ import json
 import threading
 import time
 import logging 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # # Set up logging 
 # logging.basicConfig(filename="serialLog.txt", level = logging.INFO)
@@ -13,7 +17,7 @@ app = Flask(__name__)
 
 # Configure Serial (change based on your system)
 #"/dev/cu.usbserial-D30873OK" 
-SERIAL_PORT = "/dev/cu.usbmodem157920201"
+SERIAL_PORT = os.getenv("SERIAL_PORT")
 BAUD_RATE = 115200
 
 
