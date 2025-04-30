@@ -56,9 +56,9 @@ void loop() {
         
   // Create a JSON object with sensor data
   JsonDocument jsonDoc;
-  jsonDoc["temp"] = scd30.temperature;
-  jsonDoc["humidity"] = scd30.relative_humidity;
-  jsonDoc["co2"] = scd30.CO2;
+  jsonDoc["temp"] = roundf(scd30.temperature*100)/100.0;
+  jsonDoc["humidity"] = roundf(scd30.relative_humidity*100)/100.0;
+  jsonDoc["co2"] = roundf(scd30.CO2*100)/100.0;
 
   // Convert JSON object to string and send it over Serial
   String jsonString;
@@ -104,6 +104,6 @@ void handleDutyCycleCommand(String input) {
   }
   String jsonString;
   serializeJson(jsonDoc, jsonString);
-  Serial.println(jsonString);
+  //Serial.println(jsonString);
 }
 

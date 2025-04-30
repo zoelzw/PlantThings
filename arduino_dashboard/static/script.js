@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function sendLedData() {
         // Get the values of both sliders
         const led1Value = document.getElementById("led1").value;
-        //const led2Value = document.getElementById("led2").value;
+        const led2Value = document.getElementById("led2").value;
 
         // Construct the message in the format "L, 1, value" and "L, 2, value"
         //const ledData = `L,1, ${led1Value}`;//`L,1,${led1Value}`;

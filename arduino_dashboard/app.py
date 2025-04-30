@@ -4,6 +4,7 @@ import json
 import threading
 import time
 import logging 
+import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -105,17 +106,10 @@ def get_sensor_history():
 @app.route("/led", methods=["POST"])
 def set_led():
     jsonData = request.json
-    #encoData = (json.dumps(ledString)).encode("utf-8")
-    print(jsonData + "fdfdfdf")
-    #command = jsonData["command"]  # "L"
-    #led = data["led"]          # 1
-    #value = data["value"]      # 128
-    #print("oingo")
-    #print(command, led, value)
-    #print("boingo")
-    #command = str(data["command"])+ ',' + str(data["led"]) + ',' + str(data["value"])
-    ser.write(encoData)#command)
-    print(ledString, encoData)#command)
+    led1str = f"{jsonData['command']},{jsonData['led']},{jsonData['value']}\r\n"
+    #print(jsonData)
+    ser.write(led1str.encode("utf-8"))#command)
+    print("encoddat:",led1str)#command)
     return jsonify({"status": "success", "message": "LED updated"}), 200
 
 if __name__ == "__main__":
